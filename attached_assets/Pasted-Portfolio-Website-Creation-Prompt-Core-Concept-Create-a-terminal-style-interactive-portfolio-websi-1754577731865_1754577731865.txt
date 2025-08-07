@@ -1,0 +1,45 @@
+Portfolio Website Creation Prompt
+Core Concept
+Create a terminal-style interactive portfolio website with a split-screen layout featuring a 3D interactive ID card and a command-line interface.
+Design Elements
+Layout Structure
+Split-screen design: Left side (visual), Right side (terminal interface)
+Color scheme: Dark theme with green terminal text (#00ff00) and white text
+Typography: Monospace font for terminal feel
+Left Section - Visual Elements
+Header: Name in green, title in white
+3D Interactive ID Card:
+Black card with white border
+Professional headshot photo
+Company/portfolio branding ("gateremark")
+Stylized logo (letter "G")
+Black lanyard attachment
+Hover/click interactions
+Interactive label: "[Interactive 3D Card]" in green
+Right Section - Terminal Interface
+Navigation bar: Green links separated by vertical bars
+help | about | projects | skills | experience | contact | education | certifications | leadership | sudo | clear
+Command prompt: username@portfolio:~$ in green
+Welcome message: Friendly introduction with instructions
+Interactive commands: Users can type commands to navigate
+Technical Features
+3D Graphics: Three.js for the ID card visualization
+Interactive Elements: Clickable terminal commands
+Responsive Design: Works on desktop and mobile
+Smooth Animations: Card rotation, terminal typing effects
+Content Structure
+Personal Info: Name, title, photo
+Navigation: Multiple sections accessible via terminal commands
+Professional Sections: Projects, skills, experience, education
+Interactive Elements: 3D card, terminal commands
+User Experience
+Terminal Simulation: Realistic command-line interface
+3D Interaction: Rotate, zoom, interact with the ID card
+Progressive Disclosure: Information revealed through commands
+Professional Yet Creative: Balances professionalism with technical creativity
+Implementation Steps
+Frontend Framework: Next.js or React
+3D Graphics: Three.js for the ID card
+Styling: CSS/Tailwind for terminal theme
+Interactions: JavaScript for terminal commands
+Assets: Professional photo, 3D models, textures
