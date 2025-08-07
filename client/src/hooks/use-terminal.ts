@@ -24,14 +24,14 @@ const commands: Record<string, () => string> = {
 I'm a passionate Software & AI Engineer with 3+ years of experience
 in full-stack development and machine learning.
 
-🎯 Specializing in:
+Specializing in:
    • React/Next.js & Node.js development
    • Python/Django backend systems
    • Machine Learning & AI applications
    • Cloud deployment (AWS, GCP)
 
-💡 Always excited about learning new technologies and solving 
-   complex problems with elegant solutions.`,
+Always excited about learning new technologies and solving 
+complex problems with elegant solutions.`,
 
   projects: () => `Recent Projects
 ━━━━━━━━━━━━━━━
@@ -97,13 +97,13 @@ Software Developer Intern | Innovation Labs (2020-2021)
 
   contact: () => `Get In Touch
 ━━━━━━━━━━━━━
-📧 Email:    manish.kumar.dev@gmail.com
-🌐 LinkedIn: linkedin.com/in/manishkumar-dev
-🐙 GitHub:   github.com/manishkumar-dev
-🌍 Website:  manishkumar.dev
-📍 Location: Bangalore, India
+Email:    manish.kumar.dev@gmail.com
+LinkedIn: linkedin.com/in/manishkumar-dev
+GitHub:   github.com/manishkumar-dev
+Website:  manishkumar.dev
+Location: Bangalore, India
 
-💬 Available for:
+Available for:
    • Full-time opportunities
    • Freelance projects
    • Technical consultations
@@ -204,7 +204,8 @@ export function useTerminal() {
 
   const executeCommand = (command: string) => {
     const cmd = command.trim().toLowerCase();
-    const output = commands[cmd] || `Command not found: ${command}
+    const outputFn = commands[cmd];
+    const output = outputFn ? outputFn() : `Command not found: ${command}
 Type 'help' for available commands.`;
     
     setHistory(prev => [...prev, { command, output }]);

@@ -18,7 +18,7 @@ export default function IdCard() {
       const rotateX = (y - centerY) / 10;
       const rotateY = (centerX - x) / 10;
       
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
     };
 
     const handleMouseLeave = () => {
@@ -38,22 +38,22 @@ export default function IdCard() {
     <div className="relative" data-testid="card-container">
       <div 
         ref={cardRef}
-        className="card-3d id-card rounded-2xl p-6 w-80 h-52 relative animate-card-float cursor-pointer"
+        className="card-3d id-card rounded-xl p-4 w-64 h-40 relative animate-card-float cursor-pointer"
         data-testid="card-3d"
       >
         {/* Card Content */}
         <div className="flex items-start h-full">
-          <div className="flex-shrink-0 mr-4">
-            {/* Professional headshot placeholder */}
+          <div className="flex-shrink-0 mr-3">
+            {/* Professional headshot */}
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=200" 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=180" 
               alt="Manish Kumar professional headshot" 
-              className="w-20 h-24 rounded-lg object-cover border border-gray-400"
+              className="w-16 h-20 rounded-md object-cover border border-gray-400"
               data-testid="img-headshot"
             />
           </div>
           <div className="flex-1">
-            <div className="text-white text-sm font-bold mb-1" data-testid="text-card-name">
+            <div className="text-white text-xs font-bold mb-1" data-testid="text-card-name">
               MANISH KUMAR
             </div>
             <div className="text-gray-300 text-xs mb-2" data-testid="text-card-title">
@@ -62,8 +62,8 @@ export default function IdCard() {
             <div className="text-terminal-green text-xs font-mono" data-testid="text-card-website">
               manishkumar.dev
             </div>
-            <div className="absolute bottom-4 right-4">
-              <div className="w-8 h-8 bg-terminal-green rounded-full flex items-center justify-center text-black font-bold text-sm" data-testid="logo-initial">
+            <div className="absolute bottom-3 right-3">
+              <div className="w-6 h-6 bg-terminal-green rounded-full flex items-center justify-center text-black font-bold text-xs" data-testid="logo-initial">
                 M
               </div>
             </div>
@@ -72,11 +72,11 @@ export default function IdCard() {
       </div>
       
       {/* Lanyard */}
-      <div className="lanyard w-1 h-16 mx-auto mt-4" data-testid="lanyard"></div>
+      <div className="lanyard w-0.5 h-12 mx-auto mt-2" data-testid="lanyard"></div>
       
       {/* Interactive Label */}
-      <div className="text-center mt-4">
-        <span className="text-terminal-green text-sm" data-testid="text-interactive-label">
+      <div className="text-center mt-2">
+        <span className="text-terminal-green text-xs" data-testid="text-interactive-label">
           [Interactive 3D Card]
         </span>
       </div>
