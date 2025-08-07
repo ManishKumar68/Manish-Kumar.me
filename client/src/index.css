@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 100%);
+  --terminal-green: hsl(120, 100%, 50%);
+  --terminal-bg: hsl(0, 0%, 0%);
+  --card-border: hsl(0, 0%, 100%);
+  --card-bg: hsl(0, 0%, 10%);
+  --card-gradient: linear-gradient(145deg, hsl(0, 0%, 10%), hsl(0, 0%, 0%));
+  --font-mono: 'Courier Prime', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+}
+
+.dark {
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 100%);
+  --terminal-green: hsl(120, 100%, 50%);
+  --terminal-bg: hsl(0, 0%, 0%);
+  --card-border: hsl(0, 0%, 100%);
+  --card-bg: hsl(0, 0%, 10%);
+  --card-gradient: linear-gradient(145deg, hsl(0, 0%, 10%), hsl(0, 0%, 0%));
+  --font-mono: 'Courier Prime', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply font-mono antialiased bg-terminal-bg text-foreground overflow-x-hidden;
+    background-color: var(--terminal-bg);
+    font-family: var(--font-mono);
+  }
+  
+  html {
+    background-color: var(--terminal-bg);
+  }
+}
+
+@layer components {
+  .terminal-cursor::after {
+    content: '_';
+    animation: cursor-blink 1s infinite;
+    color: var(--terminal-green);
+  }
+  
+  .terminal-line {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+  
+  .command-output {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  .command-output.show {
+    max-height: 500px;
+  }
+  
+  .id-card {
+    background: var(--card-gradient);
+    border: 2px solid var(--card-border);
+    box-shadow: 
+      0 20px 40px rgba(0, 255, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+  }
+  
+  .card-3d:hover {
+    transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+  }
+  
+  .lanyard {
+    background: linear-gradient(90deg, hsl(0, 0%, 20%), hsl(0, 0%, 10%));
+    position: relative;
+  }
+  
+  .lanyard::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    background: hsl(0, 0%, 40%);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-float {
+  0%, 100% { 
+    transform: translateY(0px) rotateY(0deg); 
+  }
+  50% { 
+    transform: translateY(-10px) rotateY(5deg); 
+  }
+}
+
+.animate-card-float {
+  animation: card-float 6s ease-in-out infinite;
+}
