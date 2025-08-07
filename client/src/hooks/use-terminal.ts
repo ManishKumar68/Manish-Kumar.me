@@ -55,28 +55,25 @@ Type 'contact' to discuss collaboration opportunities!`,
 
   skills: () => `Technical Skills
 ━━━━━━━━━━━━━━━
-Programming Languages:
-  ████████████ JavaScript/TypeScript
-  ███████████░ Python
-  ████████░░░░ Java
-  ██████░░░░░░ C++
 
 Frontend Technologies:
   ████████████ React/Next.js
-  ██████████░░ HTML5/CSS3
-  █████████░░░ Vue.js
-  ████████░░░░ Tailwind CSS
+  ███████████░ HTML5/CSS3
+  ██████████░░ Vue.js
+  █████████░░░ Tailwind CSS
 
 Backend & Database:
-  ███████████░ Node.js
-  ██████████░░ Django/FastAPI
-  █████████░░░ PostgreSQL
-  ████████░░░░ MongoDB
+  ████████████ Node.js
+  ███████████░ Django/FastAPI
+  ██████████░░ PostgreSQL
+  █████████░░░ MongoDB
 
 AI/ML & Cloud:
-  ██████████░░ TensorFlow/PyTorch
-  █████████░░░ AWS/GCP
-  ████████░░░░ Docker/Kubernetes`,
+  ████████████ TensorFlow/PyTorch
+  ███████████░ AWS/GCP
+  ██████████░░ Docker/Kubernetes
+
+manishkumar@portfolio:~$`,
 
   experience: () => `Professional Experience
 ━━━━━━━━━━━━━━━━━━━━━━━

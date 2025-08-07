@@ -47,44 +47,49 @@ export default function Terminal() {
   return (
     <div className="h-full flex flex-col bg-black">
       {/* Navigation Bar */}
-      <div className="border-b border-gray-800 p-4" data-testid="nav-bar">
+      <div className="p-4 pb-3" data-testid="nav-bar">
         <nav className="text-terminal-green text-sm flex flex-wrap gap-0">
           {['help', 'about', 'projects', 'skills', 'experience', 'contact', 'education', 'certifications', 'leadership', 'sudo', 'clear'].map((cmd, index, array) => (
             <span key={cmd} className="flex items-center">
               <button 
-                className="nav-link hover:text-white transition-colors cursor-pointer font-mono"
+                className="nav-link hover:text-white transition-colors cursor-pointer font-mono text-sm"
                 onClick={() => handleNavClick(cmd)}
                 data-testid={`button-nav-${cmd}`}
               >
                 {cmd}
               </button>
-              {index < array.length - 1 && <span className="text-gray-500 mx-2">|</span>}
+              {index < array.length - 1 && <span className="text-gray-600 mx-2">|</span>}
             </span>
           ))}
         </nav>
       </div>
       
       {/* Terminal Content */}
-      <div className="flex-1 p-4 flex flex-col">
+      <div className="flex-1 px-4 pb-4 flex flex-col overflow-hidden">
         {/* Terminal Output */}
         <div 
           ref={outputRef}
           id="terminal-output" 
-          className="flex-1 overflow-y-auto scrollbar-hide mb-4"
+          className="flex-1 overflow-y-auto scrollbar-hide"
           data-testid="terminal-output"
         >
           {/* Welcome Message */}
           {history.length === 0 && (
             <>
-              <div className="mb-2">
-                <span className="text-terminal-green font-mono">manishkumar@portfolio:~$</span> 
-                <span className="text-white ml-1 font-mono">welcome</span>
+              <div className="mb-3">
+                <span className="text-terminal-green font-mono text-sm">manishkumar@portfolio:~$</span> 
+                <span className="text-white ml-1 font-mono text-sm">welcome</span>
               </div>
               
-              <div className="mb-6 text-white font-mono leading-relaxed">
+              <div className="mb-6 text-white font-mono text-sm leading-relaxed">
                 Hi, I'm Manish Kumar, a Software & AI Engineer.<br /><br />
                 Welcome to my interactive "AI powered" portfolio terminal!<br />
                 Type 'help' to see available commands.
+              </div>
+              
+              <div className="flex items-center">
+                <span className="text-terminal-green font-mono text-sm">manishkumar@portfolio:~$</span> 
+                <span className="terminal-cursor ml-1"></span>
               </div>
             </>
           )}
@@ -93,32 +98,30 @@ export default function Terminal() {
           {history.map((entry: any, index: number) => (
             <div key={index} className="mb-4">
               <div className="mb-2">
-                <span className="text-terminal-green font-mono">manishkumar@portfolio:~$</span> 
-                <span className="text-white ml-1 font-mono">{entry.command}</span>
+                <span className="text-terminal-green font-mono text-sm">manishkumar@portfolio:~$</span> 
+                <span className="text-white ml-1 font-mono text-sm">{entry.command}</span>
               </div>
-              <div className="text-white whitespace-pre-line font-mono leading-relaxed" data-testid={`output-${entry.command}`}>
+              <div className="text-white whitespace-pre-line font-mono text-sm leading-relaxed mb-3" data-testid={`output-${entry.command}`}>
                 {entry.output}
+              </div>
+              <div className="flex items-center">
+                <span className="text-terminal-green font-mono text-sm">manishkumar@portfolio:~$</span> 
+                <span className="terminal-cursor ml-1"></span>
               </div>
             </div>
           ))}
-          
-          {/* Current Prompt */}
-          <div className="flex items-center">
-            <span className="text-terminal-green font-mono">manishkumar@portfolio:~$</span> 
-            <span className="terminal-cursor ml-1"></span>
-          </div>
         </div>
         
-        {/* Command Input */}
-        <div className="flex items-center border-t border-gray-800 pt-4" data-testid="input-container">
-          <span className="text-terminal-green mr-2 font-mono">manishkumar@portfolio:~$</span>
+        {/* Command Input - Fixed at bottom */}
+        <div className="flex items-center mt-4 pt-3 border-t border-gray-800" data-testid="input-container">
+          <span className="text-terminal-green mr-2 font-mono text-sm">manishkumar@portfolio:~$</span>
           <input 
             ref={inputRef}
             type="text" 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="bg-transparent text-white font-mono outline-none flex-1 caret-terminal-green"
+            className="bg-transparent text-white font-mono outline-none flex-1 caret-terminal-green text-sm"
             placeholder=""
             autoComplete="off"
             spellCheck={false}

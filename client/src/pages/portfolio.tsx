@@ -8,13 +8,13 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white font-mono overflow-hidden">
-      {/* Full Layout Container */}
-      <div className="flex h-screen">
+    <div className="min-h-screen bg-black text-white font-mono">
+      {/* Desktop Layout */}
+      <div className="hidden lg:flex h-screen">
         {/* Left Section - Visual Elements */}
-        <div className="w-1/2 flex flex-col relative border-r border-gray-800">
+        <div className="w-1/2 flex flex-col relative">
           {/* Header Section */}
-          <div className="p-6 border-b border-gray-800" data-testid="header-section">
+          <div className="p-6" data-testid="header-section">
             <h1 className="text-2xl font-bold text-terminal-green mb-1" data-testid="text-name">
               Manish Kumar
             </h1>
@@ -29,7 +29,7 @@ export default function Portfolio() {
           </div>
           
           {/* Footer Section */}
-          <div className="p-4 border-t border-gray-800">
+          <div className="p-6">
             <div className="text-terminal-green text-sm font-mono" data-testid="text-prompt-footer">
               manishkumar@portfolio:~$
             </div>
@@ -37,10 +37,33 @@ export default function Portfolio() {
         </div>
         
         {/* Right Section - Terminal Interface */}
-        <div className="w-1/2 flex flex-col bg-black">
-          <div className="h-full p-4 flex flex-col">
-            <Terminal />
+        <div className="w-1/2 bg-black border-l border-gray-800">
+          <Terminal />
+        </div>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden flex flex-col min-h-screen">
+        {/* Mobile Header */}
+        <div className="p-4 border-b border-gray-800">
+          <h1 className="text-xl font-bold text-terminal-green mb-1">
+            Manish Kumar
+          </h1>
+          <p className="text-sm text-gray-300">
+            Software Engineer
+          </p>
+        </div>
+        
+        {/* Mobile Card */}
+        <div className="p-4 flex justify-center border-b border-gray-800">
+          <div className="scale-75">
+            <IdCard />
           </div>
+        </div>
+        
+        {/* Mobile Terminal */}
+        <div className="flex-1">
+          <Terminal />
         </div>
       </div>
     </div>
