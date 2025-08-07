@@ -7,6 +7,9 @@ This is an interactive terminal-style portfolio website built as a single-page a
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design preferences: Professional, modern terminal-style interface with proper sectioned layout
+Font preference: Professional monospace fonts (JetBrains Mono)
+Layout preference: Exact match to reference design with header, main, and footer sections
 
 ## System Architecture
 

@@ -8,33 +8,40 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-terminal-bg text-white font-mono">
-      {/* Left Section - Visual Elements */}
-      <div className="w-1/2 flex flex-col items-center justify-start p-6 relative border-r border-gray-800">
-        {/* Header */}
-        <div className="text-left w-full mb-8" data-testid="header-section">
-          <h1 className="text-2xl font-bold text-terminal-green mb-1" data-testid="text-name">
-            Manish Kumar
-          </h1>
-          <p className="text-sm text-white" data-testid="text-title">
-            Software Engineer
-          </p>
+    <div className="min-h-screen bg-black text-white font-mono overflow-hidden">
+      {/* Full Layout Container */}
+      <div className="flex h-screen">
+        {/* Left Section - Visual Elements */}
+        <div className="w-1/2 flex flex-col relative border-r border-gray-800">
+          {/* Header Section */}
+          <div className="p-6 border-b border-gray-800" data-testid="header-section">
+            <h1 className="text-2xl font-bold text-terminal-green mb-1" data-testid="text-name">
+              Manish Kumar
+            </h1>
+            <p className="text-sm text-gray-300" data-testid="text-title">
+              Software Engineer
+            </p>
+          </div>
+          
+          {/* Main Image/Card Section */}
+          <div className="flex-1 flex items-center justify-center p-8">
+            <IdCard />
+          </div>
+          
+          {/* Footer Section */}
+          <div className="p-4 border-t border-gray-800">
+            <div className="text-terminal-green text-sm font-mono" data-testid="text-prompt-footer">
+              manishkumar@portfolio:~$
+            </div>
+          </div>
         </div>
         
-        {/* 3D Interactive ID Card */}
-        <div className="mt-8">
-          <IdCard />
+        {/* Right Section - Terminal Interface */}
+        <div className="w-1/2 flex flex-col bg-black">
+          <div className="h-full p-4 flex flex-col">
+            <Terminal />
+          </div>
         </div>
-        
-        {/* Footer info */}
-        <div className="absolute bottom-4 left-4 text-terminal-green text-xs" data-testid="text-prompt-footer">
-          manishkumar@portfolio:~$
-        </div>
-      </div>
-      
-      {/* Right Section - Terminal Interface */}
-      <div className="w-1/2 p-4 flex flex-col">
-        <Terminal />
       </div>
     </div>
   );

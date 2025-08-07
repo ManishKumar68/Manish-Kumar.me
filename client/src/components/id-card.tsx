@@ -36,47 +36,64 @@ export default function IdCard() {
 
   return (
     <div className="relative" data-testid="card-container">
+      {/* Professional ID Card */}
       <div 
         ref={cardRef}
-        className="card-3d id-card rounded-xl p-4 w-64 h-40 relative animate-card-float cursor-pointer"
+        className="relative bg-gray-900 border border-gray-600 rounded-lg w-72 h-44 p-4 cursor-pointer transform transition-transform duration-300 hover:scale-105 shadow-2xl"
         data-testid="card-3d"
+        style={{
+          background: 'linear-gradient(145deg, #1a1a1a, #0a0a0a)',
+          boxShadow: '0 10px 30px rgba(0, 255, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+        }}
       >
         {/* Card Content */}
-        <div className="flex items-start h-full">
-          <div className="flex-shrink-0 mr-3">
-            {/* Professional headshot */}
+        <div className="flex h-full">
+          {/* Left Side - Photo */}
+          <div className="flex-shrink-0 mr-4">
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=180" 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=120&h=150" 
               alt="Manish Kumar professional headshot" 
-              className="w-16 h-20 rounded-md object-cover border border-gray-400"
+              className="w-20 h-24 rounded object-cover border border-gray-500"
               data-testid="img-headshot"
             />
           </div>
-          <div className="flex-1">
-            <div className="text-white text-xs font-bold mb-1" data-testid="text-card-name">
-              MANISH KUMAR
+          
+          {/* Right Side - Info */}
+          <div className="flex-1 flex flex-col justify-between">
+            <div>
+              <div className="text-white text-sm font-bold mb-1" data-testid="text-card-name">
+                MANISH KUMAR
+              </div>
+              <div className="text-gray-300 text-xs mb-3" data-testid="text-card-title">
+                Software Engineer
+              </div>
             </div>
-            <div className="text-gray-300 text-xs mb-2" data-testid="text-card-title">
-              Software Engineer
-            </div>
-            <div className="text-terminal-green text-xs font-mono" data-testid="text-card-website">
-              manishkumar.dev
-            </div>
-            <div className="absolute bottom-3 right-3">
-              <div className="w-6 h-6 bg-terminal-green rounded-full flex items-center justify-center text-black font-bold text-xs" data-testid="logo-initial">
+            
+            <div className="flex items-end justify-between">
+              <div className="text-terminal-green text-xs font-mono" data-testid="text-card-website">
+                manishkumar.dev
+              </div>
+              
+              {/* Logo */}
+              <div className="w-8 h-8 bg-terminal-green rounded-full flex items-center justify-center text-black font-bold text-sm" data-testid="logo-initial">
                 M
               </div>
             </div>
           </div>
         </div>
+        
+        {/* Lanyard hole */}
+        <div className="absolute top-2 left-2 w-3 h-3 bg-gray-700 rounded-full border border-gray-500"></div>
       </div>
       
       {/* Lanyard */}
-      <div className="lanyard w-0.5 h-12 mx-auto mt-2" data-testid="lanyard"></div>
+      <div className="flex justify-center mt-3">
+        <div className="w-1 h-16 bg-gray-700 rounded-full" data-testid="lanyard"></div>
+      </div>
       
       {/* Interactive Label */}
-      <div className="text-center mt-2">
-        <span className="text-terminal-green text-xs" data-testid="text-interactive-label">
+      <div className="text-center mt-3">
+        <span className="text-terminal-green text-xs font-mono" data-testid="text-interactive-label">
           [Interactive 3D Card]
         </span>
       </div>
