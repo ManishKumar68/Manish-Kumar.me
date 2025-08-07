@@ -15,10 +15,10 @@ export default function Portfolio() {
         <div className="w-1/2 flex flex-col relative">
           {/* Header Section */}
           <div className="p-6" data-testid="header-section">
-            <h1 className="text-2xl font-bold text-terminal-green mb-1" data-testid="text-name">
+            <h1 className="text-2xl font-normal text-terminal-green mb-1" data-testid="text-name">
               Manish Kumar
             </h1>
-            <p className="text-sm text-gray-300" data-testid="text-title">
+            <p className="text-sm text-gray-300 font-normal" data-testid="text-title">
               Software Engineer
             </p>
           </div>
@@ -28,12 +28,7 @@ export default function Portfolio() {
             <IdCard />
           </div>
           
-          {/* Footer Section */}
-          <div className="p-6">
-            <div className="text-terminal-green text-sm font-mono" data-testid="text-prompt-footer">
-              manishkumar@portfolio:~$
-            </div>
-          </div>
+
         </div>
         
         {/* Right Section - Terminal Interface */}
@@ -46,10 +41,10 @@ export default function Portfolio() {
       <div className="lg:hidden flex flex-col min-h-screen">
         {/* Mobile Header */}
         <div className="p-4 border-b border-gray-800">
-          <h1 className="text-xl font-bold text-terminal-green mb-1">
+          <h1 className="text-xl font-normal text-terminal-green mb-1">
             Manish Kumar
           </h1>
-          <p className="text-sm text-gray-300">
+          <p className="text-sm text-gray-300 font-normal">
             Software Engineer
           </p>
         </div>

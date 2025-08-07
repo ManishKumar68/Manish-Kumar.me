@@ -61,10 +61,10 @@ export default function IdCard() {
           {/* Right Side - Info */}
           <div className="flex-1 flex flex-col justify-between">
             <div>
-              <div className="text-white text-sm font-bold mb-1" data-testid="text-card-name">
+              <div className="text-white text-sm font-normal mb-1" data-testid="text-card-name">
                 MANISH KUMAR
               </div>
-              <div className="text-gray-300 text-xs mb-3" data-testid="text-card-title">
+              <div className="text-gray-300 text-xs font-normal mb-3" data-testid="text-card-title">
                 Software Engineer
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function IdCard() {
               </div>
               
               {/* Logo */}
-              <div className="w-8 h-8 bg-terminal-green rounded-full flex items-center justify-center text-black font-bold text-sm" data-testid="logo-initial">
+              <div className="w-8 h-8 bg-terminal-green rounded-full flex items-center justify-center text-black font-normal text-sm" data-testid="logo-initial">
                 M
               </div>
             </div>

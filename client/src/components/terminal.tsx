@@ -52,7 +52,7 @@ export default function Terminal() {
           {['help', 'about', 'projects', 'skills', 'experience', 'contact', 'education', 'certifications', 'leadership', 'sudo', 'clear'].map((cmd, index, array) => (
             <span key={cmd} className="flex items-center">
               <button 
-                className="nav-link hover:text-white transition-colors cursor-pointer font-mono text-sm"
+                className="nav-link hover:text-white transition-colors cursor-pointer font-mono text-sm font-normal"
                 onClick={() => handleNavClick(cmd)}
                 data-testid={`button-nav-${cmd}`}
               >
@@ -77,19 +77,14 @@ export default function Terminal() {
           {history.length === 0 && (
             <>
               <div className="mb-3">
-                <span className="text-terminal-green font-mono text-sm">manishkumar@portfolio:~$</span> 
-                <span className="text-white ml-1 font-mono text-sm">welcome</span>
+                <span className="text-terminal-green font-mono text-sm font-normal">manishkumar@portfolio:~$</span> 
+                <span className="text-white ml-1 font-mono text-sm font-normal">welcome</span>
               </div>
               
-              <div className="mb-6 text-white font-mono text-sm leading-relaxed">
+              <div className="mb-6 text-white font-mono text-sm font-normal leading-relaxed">
                 Hi, I'm Manish Kumar, a Software & AI Engineer.<br /><br />
                 Welcome to my interactive "AI powered" portfolio terminal!<br />
                 Type 'help' to see available commands.
-              </div>
-              
-              <div className="flex items-center">
-                <span className="text-terminal-green font-mono text-sm">manishkumar@portfolio:~$</span> 
-                <span className="terminal-cursor ml-1"></span>
               </div>
             </>
           )}
@@ -98,30 +93,34 @@ export default function Terminal() {
           {history.map((entry: any, index: number) => (
             <div key={index} className="mb-4">
               <div className="mb-2">
-                <span className="text-terminal-green font-mono text-sm">manishkumar@portfolio:~$</span> 
-                <span className="text-white ml-1 font-mono text-sm">{entry.command}</span>
+                <span className="text-terminal-green font-mono text-sm font-normal">manishkumar@portfolio:~$</span> 
+                <span className="text-white ml-1 font-mono text-sm font-normal">{entry.command}</span>
               </div>
-              <div className="text-white whitespace-pre-line font-mono text-sm leading-relaxed mb-3" data-testid={`output-${entry.command}`}>
+              <div className="text-white whitespace-pre-line font-mono text-sm font-normal leading-relaxed mb-3" data-testid={`output-${entry.command}`}>
                 {entry.output}
-              </div>
-              <div className="flex items-center">
-                <span className="text-terminal-green font-mono text-sm">manishkumar@portfolio:~$</span> 
-                <span className="terminal-cursor ml-1"></span>
               </div>
             </div>
           ))}
+          
+          {/* Current Prompt - Only show when there's no input */}
+          {!input && (
+            <div className="flex items-center">
+              <span className="text-terminal-green font-mono text-sm font-normal">manishkumar@portfolio:~$</span> 
+              <span className="terminal-cursor ml-1"></span>
+            </div>
+          )}
         </div>
         
-        {/* Command Input - Fixed at bottom */}
+        {/* Command Input - Only one at bottom */}
         <div className="flex items-center mt-4 pt-3 border-t border-gray-800" data-testid="input-container">
-          <span className="text-terminal-green mr-2 font-mono text-sm">manishkumar@portfolio:~$</span>
+          <span className="text-terminal-green mr-2 font-mono text-sm font-normal">manishkumar@portfolio:~$</span>
           <input 
             ref={inputRef}
             type="text" 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="bg-transparent text-white font-mono outline-none flex-1 caret-terminal-green text-sm"
+            className="bg-transparent text-white font-mono outline-none flex-1 caret-terminal-green text-sm font-normal"
             placeholder=""
             autoComplete="off"
             spellCheck={false}
