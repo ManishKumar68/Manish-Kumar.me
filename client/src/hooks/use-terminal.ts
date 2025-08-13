@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 
 interface TerminalEntry {
   command: string;
   output: string;
 }
 
-const commands: Record<string, () => string> = {
-  help: () => `Available commands:
+// Memoized command functions for better performance
+const useCommands = () => {
+  return useMemo(() => ({
+    help: () => `Available commands:
   help          - Show this help message
   about         - Learn more about me
   projects      - View my projects
@@ -17,146 +19,147 @@ const commands: Record<string, () => string> = {
   certifications- Professional certifications
   leadership    - Leadership experience
   sudo          - Admin access (try it!)
-  clear         - Clear terminal`,
+  clear         - Clear terminal
+  
+  Type any command to continue...`,
 
-  about: () => `About Manish Kumar
-━━━━━━━━━━━━━━━━━━━━
-I'm a passionate Software & AI Engineer with 3+ years of experience
-in full-stack development and machine learning.
+    // about section
+    about: () => `👋 Hello, I'm Manish Kumar!
 
-Specializing in:
-   • React/Next.js & Node.js development
-   • Python/Django backend systems
-   • Machine Learning & AI applications
-   • Cloud deployment (AWS, GCP)
+I'm a College Student With expertise in full-stack development, Other Basic skill's..
 
 Always excited about learning new technologies and solving 
 complex problems with elegant solutions.`,
 
-  projects: () => `Recent Projects
-━━━━━━━━━━━━━━━
-🔧 AI-Powered Portfolio Terminal (Current)
+    // Projects section
+    projects: () => `Recent Projects
+
+🔧 AI-Powered Portfolio Terminal (Current $ UnderProcess)
    Interactive terminal-style portfolio with 3D elements
    Tech: Three.js, React, Tailwind CSS
 
-🤖 Smart Task Manager
-   AI-assisted productivity app with natural language processing
-   Tech: Python, OpenAI API, React, PostgreSQL
 
-🌟 E-commerce Analytics Dashboard
-   Real-time sales analytics with predictive insights
-   Tech: React, D3.js, Python, FastAPI
+📚 SMS LOGIN - School Management System (PHP) | September 2024
+  Engineered a full-stack ERP login system using PHP to streamline school operations and data management.
+  Integrated real-time grade reporting and analytics for improved academic transparency.
+  Implemented secure login and role-based access control,ensuring data privacy and user-specific functionality.
+  Automated student record handling, including personal details, academic performance, and attendance tracking.
+  Boosted administrative efficiency by digitizing manual processes and centralizing school data.
 
-📊 Social Media Sentiment Analyzer
-   ML-powered sentiment analysis for brand monitoring
-   Tech: Python, scikit-learn, Flask, Docker
+  
+🎮 CONNECT4 GAME - Core Java Project | July 2024 | Trainee at Internshala
+  Developed a fully functional Connect4 game using Core Java as part of Internshala's online training.
+  Built an interactive GUI using Java Swing/AWT for seamless user experience and gameplay.
+  Tested and debugged game mechanics, ensuring smooth performance and accurate rule enforcement.Applied object-oriented programming principles to design game logic, user interaction, and win conditions.
 
-Type 'contact' to discuss collaboration opportunities!`,
 
-  skills: () => `Technical Skills
-━━━━━━━━━━━━━━━
+💻 Job Portal App with AI ATS | May 2025
+  Built a MERN stack job portal with secure JWT login.
+  Integrated AI resume scannerusing NLP for skill-based matching.
+  Deployed on Vercel, Render, MongoDB Atlas for cloud scalability.
+  Followed Rapid Application Development (RAD) model in a team setup.
+  
+  
+🏫 TECHNICAL COLLEGE OF INDIA | April-May 2023| Varanasi ,UP
+  WordPress Development :launched a dynamic college website using WordPress, enhancing online presence and accessibility for students and faculty.
+  Designed a mobile-responsive layout to ensure optimal viewing across various devices, increasing engagement and accessibility for users on-the-go.
+  Implemented an intuitive navigation system to facilitate easy access to essential information on courses, events, and faculty profiles, improving user experience`,
+
+    // skills section
+    skills: () => `🧑‍💻 Technical Skills
+
+Programming Languages:
+- javaScript
+- Bsic Python
+- HTML5/CSS3
+- basic java
 
 Frontend Technologies:
-  ████████████ React/Next.js
-  ███████████░ HTML5/CSS3
-  ██████████░░ Vue.js
-  █████████░░░ Tailwind CSS
-
+- HTML5/CSS3
+- JavaScript
+  
 Backend & Database:
-  ████████████ Node.js
-  ███████████░ Django/FastAPI
-  ██████████░░ PostgreSQL
-  █████████░░░ MongoDB
+- SQL
+- MongoDB
 
-AI/ML & Cloud:
-  ████████████ TensorFlow/PyTorch
-  ███████████░ AWS/GCP
-  ██████████░░ Docker/Kubernetes
+Tools:
+- Git/GitHub
+- CI/CD (GitHub )`,
 
-manishkumar@portfolio:~$`,
+    //  experience section
+    experience: () => `Professional Experience
 
-  experience: () => `Professional Experience
-━━━━━━━━━━━━━━━━━━━━━━━
 Senior Software Engineer | TechCorp Inc. (2022-Present)
-  • Led development of microservices architecture serving 100K+ users
-  • Implemented CI/CD pipelines reducing deployment time by 60%
-  • Mentored junior developers and conducted technical interviews
+  • Led development of microservices architecture serving 100K+ users`,
 
-Full Stack Developer | StartupXYZ (2021-2022)
-  • Built responsive web applications using React and Node.js
-  • Developed RESTful APIs and integrated third-party services
-  • Collaborated with cross-functional teams using Agile methodology
+    // contact section
+    contact: () => `Get In Touch
 
-Software Developer Intern | Innovation Labs (2020-2021)
-  • Created data visualization dashboards using Python and D3.js
-  • Contributed to open-source projects and documentation
-  • Participated in hackathons and technical workshops`,
+📧 Email:    manishkanojia79@gmail.com
+🌐 LinkedIn: https://www.linkedin.com/in/manish-kumar79/
+🐙 GitHub:   https://github.com/ManishKumar68
+📱 Phone:    +91 8651060667
+📍 Location: India
 
-  contact: () => `Get In Touch
-━━━━━━━━━━━━━
-Email:    manish.kumar.dev@gmail.com
-LinkedIn: linkedin.com/in/manishkumar-dev
-GitHub:   github.com/manishkumar-dev
-Website:  manishkumar.dev
-Location: Bangalore, India
+Feel free to reach out for any exciting projects & skill's!`,
 
-Available for:
-   • Full-time opportunities
-   • Freelance projects
-   • Technical consultations
-   • Open source collaborations
+    // education section
+    education: () => `Education
 
-Feel free to reach out for any exciting projects or opportunities!`,
+🎓 Bachelor of Technology in Computer Science | 2023 - 2026
+   Gyan Ganga College of Technology (GGCT), Jabalpur (M.P) 
+   CGPA: 7.41/10  |  SGPA: 7.51/10
 
-  education: () => `Education
-━━━━━━━━━
-🎓 Bachelor of Technology in Computer Science
-   XYZ University, 2020
-   CGPA: 8.7/10
+🎓 Diploma in Computer science |2021 - 2023
+  Ambition institute of Technology, Varanasi (U.P)
+  present: 76.4% | 2155/2826
 
-📚 Relevant Coursework:
-   • Data Structures & Algorithms
-   • Machine Learning & AI
-   • Database Management Systems
-   • Software Engineering
-   • Computer Networks
+🏫 Intermediate School | 2018 - 2020
+   Bhupesh gupta inter college, Bhabua (Bihar)
+    12th: 64.00% | 321/500
 
-🏆 Achievements:
-   • Dean's List for 3 consecutive semesters
-   • Winner of Inter-college Hackathon 2019
-   • Published research paper on ML applications`,
+🏫 High School | 2016 - 2018
+  Nitin Public SEC School, Bhiwadi (Rajasthan)
+  10th: 54.00% | 324/600`,
 
-  certifications: () => `Certifications
-━━━━━━━━━━━━━━
-✅ AWS Certified Solutions Architect (2023)
-✅ Google Cloud Professional Developer (2022)
-✅ MongoDB Certified Developer (2022)
-✅ React Developer Certification - Meta (2021)
-✅ Python Data Science Certification - IBM (2021)
+    //  certifications section
+    certifications: () => `Certifications With Badges & Training 
+✅ International Student Workshop on Data Science using Python| 2024-02-26
+✅ Android App Development,Trainings - Internshala |2022
+✅ Core Java Developer,Trainings - Internshala |2022
 
-🎯 Currently Pursuing:
-   • Kubernetes Application Developer (CKA)
-   • TensorFlow Developer Certificate`,
+✅ Networking (CCNA) | Cisco Networking Academy
+- CCNA: Enterprise Networking, Security, and Automation: 2025-06-13
+- CCNA: Switching, Routing, and Wireless Essentials: 2025-06-13
+- CCNA: Introduction to Networks: 2025-05-27
+- Introduction to Packet Tracer: 2024-06-08
 
-  leadership: () => `Leadership Experience
-━━━━━━━━━━━━━━━━━━━━━
-👥 Tech Lead | Current Company (2023-Present)
-   • Leading a team of 5 developers on multiple projects
-   • Conducting code reviews and technical decision making
-   • Mentoring junior developers and interns
+✅ Python Programming | Cisco Networking Academy
+- Python Essentials 2: 2025-05-30
+- Python Essentials 1: 2025-05-18
 
-🎤 Community Involvement:
-   • Speaker at Local Tech Meetups
-   • Open Source Maintainer (3 projects, 500+ stars)
-   • Volunteer at coding bootcamps for underserved communities
+✅ Cybersecurity | Cisco Networking Academy
+- Network Defense: 2024-12-05
+- Introduction to Cybersecurity: 2025-05-13
+- Introduction to Cybersecurity: 2024-07-31
+- Cybersecurity Essentials: 2024-06-09
+- Cybersecurity Essentials: 2023-12-29`,
 
-📖 Knowledge Sharing:
-   • Technical blog with 10K+ monthly readers
-   • YouTube channel on web development (5K subscribers)
-   • Workshop conductor at university tech fests`,
+    //  leadership section
+    leadership: () => `Leadership Experience`,
+    
+    // resume command
+    resume: () => `📄 Resume Access
 
-  sudo: () => `sudo: Access granted. Welcome, administrator.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Opening resume in side panel...
+Use 'resume' command or click the resume button to view.
+
+Your comprehensive resume is now available in an interactive side panel.
+The panel takes up 70% of the screen for optimal viewing experience.`,
+
+    //sudo command 
+    sudo: () => `sudo: Access granted. Welcome, administrator.
+
 🔐 SYSTEM STATUS: OPTIMAL
 📊 Portfolio views today: ${Math.floor(Math.random() * 200) + 50}
 🚀 Uptime: 99.9%
@@ -169,7 +172,7 @@ Feel free to reach out for any exciting projects or opportunities!`,
 
 Type 'whoami' to see your access level.`,
 
-  whoami: () => `You are: Visitor
+    whoami: () => `You are: Visitor
 Access Level: Guest
 IP: ${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}
 Session: ${Math.random().toString(36).substr(2, 9)}
@@ -177,7 +180,7 @@ Time: ${new Date().toLocaleTimeString()}
 
 Fun fact: You're one of ${Math.floor(Math.random() * 1000) + 100} visitors today!`,
 
-  matrix: () => `Initiating Matrix sequence...
+    matrix: () => `Initiating Matrix sequence...
 01001000 01100101 01101100 01101100 01101111 
 01010111 01101111 01110010 01101100 01100100
 ...decoding...
@@ -185,32 +188,41 @@ Fun fact: You're one of ${Math.floor(Math.random() * 1000) + 100} visitors today
 
 Just kidding! But wouldn't that be cool? 😄`,
 
-  date: () => new Date().toLocaleString(),
+    date: () => new Date().toLocaleString(),
 
-  ls: () => `total 42
+    ls: () => `total 42
 drwxr-xr-x  2 manish dev  512 ${new Date().toLocaleDateString()} about/
 drwxr-xr-x  3 manish dev  768 ${new Date().toLocaleDateString()} projects/
 drwxr-xr-x  2 manish dev  256 ${new Date().toLocaleDateString()} skills/
 drwxr-xr-x  4 manish dev 1024 ${new Date().toLocaleDateString()} experience/
 -rw-r--r--  1 manish dev 2048 ${new Date().toLocaleDateString()} resume.pdf
 -rw-r--r--  1 manish dev  512 ${new Date().toLocaleDateString()} contact.txt`,
+  }), []);
 };
 
 export function useTerminal() {
   const [history, setHistory] = useState<TerminalEntry[]>([]);
+  const commands = useCommands();
 
-  const executeCommand = (command: string) => {
+  // Memoize command execution for better performance
+  const executeCommand = useCallback((command: string) => {
     const cmd = command.trim().toLowerCase();
-    const outputFn = commands[cmd];
-    const output = outputFn ? outputFn() : `Command not found: ${command}
-Type 'help' for available commands.`;
+    const outputFn = commands[cmd as keyof typeof commands];
     
-    setHistory(prev => [...prev, { command, output }]);
-  };
+    if (outputFn) {
+      const output = outputFn();
+      setHistory(prev => [...prev, { command, output }]);
+    } else {
+      const output = `Command not found: ${command}
+Type 'help' for available commands.`;
+      setHistory(prev => [...prev, { command, output }]);
+    }
+  }, [commands]);
 
-  const clearTerminal = () => {
+  // Memoize clear terminal function
+  const clearTerminal = useCallback(() => {
     setHistory([]);
-  };
+  }, []);
 
   return {
     history,

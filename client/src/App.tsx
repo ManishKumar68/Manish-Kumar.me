@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -6,23 +7,44 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Portfolio from "@/pages/portfolio";
 import NotFound from "@/pages/not-found";
 
-function Router() {
+// Memoized router component for better performance
+const Router = memo(() => {
   return (
     <Switch>
       <Route path="/" component={Portfolio} />
       <Route component={NotFound} />
     </Switch>
   );
-}
+});
 
-function App() {
+Router.displayName = 'Router';
+
+// Memoized providers wrapper for better performance
+const AppProviders = memo(({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Router />
+        {children}
       </TooltipProvider>
     </QueryClientProvider>
+  );
+});
+
+AppProviders.displayName = 'AppProviders';
+
+function App() {
+  // Memoize the main app content to prevent unnecessary re-renders
+  const appContent = useMemo(() => (
+    <>
+      <Toaster />
+      <Router />
+    </>
+  ), []);
+
+  return (
+    <AppProviders>
+      {appContent}
+    </AppProviders>
   );
 }
 
